@@ -33,20 +33,20 @@ function  Dashboard() {
 
           {/* Car Availability and Live Status */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold">Car Availability</h3>
+            <h3 className="text-xl font-semibold">flight Availability</h3>
             <div className="flex space-x-4 mt-4">
-              <input type="text" placeholder="Car Number" className="border p-2 w-full rounded-md" />
+              <input type="text" placeholder="flight Number" className="border p-2 w-full rounded-md" />
               <input type="date" className="border p-2 w-full rounded-md" />
             </div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold">Live Car Status</h3>
+            <h3 className="text-xl font-semibold">Live flight Status</h3>
             <table className="w-full mt-4 text-left">
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Car No.</th>
+                  <th>flight No.</th>
                   <th>Driver</th>
                 </tr>
               </thead>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
   import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from "../firebase/main";
 import { useNavigate } from "react-router";
+import Dashboard from "./Dashboard";
+import { Alert } from "@mui/material";
 
 function Login() {
 
@@ -18,10 +20,15 @@ function Login() {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      navigate('/')
+      navigate('/');
+      if (email == "muhammadsaadullah@gmail.com" && password == "saadullah") {
+        navigate('/Dashboard');
+        
+      }
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        console.log('User signed in');
+          Alert('User signed in');
+
       } catch (err) {
         setError(err.message);
       }
@@ -44,7 +51,9 @@ function Login() {
       <div className="flex w-3/4 max-w-4xl rounded-lg shadow-lg overflow-hidden">
         {/* Left Section */}
         <div className="w-1/2 p-8 bg-white">
-          <div className="flex items-center justify-center mb-8">
+          <div  className="flex rounded-md flex-col items-center justify-center mb-8 shadow-md bg-slate-300 py-5">
+            <h1 className="text-lg text-stone-900">admin</h1>
+            <p className="underline"><b>user name</b> :: muhammadsaadullah@gmail.com</p> <p className="underline"> <b>password</b> :: saadullah</p>
             <img src="https://img.icons8.com/?size=100&id=12665&format=png" alt="Globe Logo" className="h-8" />
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Login</h2>

@@ -81,7 +81,7 @@ const HotelListingPage = () => {
                             <p className="text-gray-500">{hotel.description}</p>
                             <div className="mt-4 flex justify-between items-center">
                                 <span className="text-red-500 text-xl font-bold">${hotel.price}</span>
-                                <Link to="/HotelCard">
+                                <Link to="/Profile">
                                     <button className="px-6 py-2 bg-[#8dd3bb] text-white rounded-lg"> Book Now </button>
                                 </Link>
                             </div>

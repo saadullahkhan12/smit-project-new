@@ -8,7 +8,8 @@ import TravelPage from './pages/TravelPage';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import { useState } from 'react';
+import Profile from './pages/Profile';
+import AddCard from './pages/AddCard';
 
 function App() {
   
@@ -23,6 +24,8 @@ function App() {
       <Route path='/Dashboard' element={<Dashboard/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/HotelCard' element={<HotelCard/>}/>
+      <Route path='/Profile' element={<Profile/>}/>
+      <Route path='/Addcard' element={<AddCard/>}/>
       
 
 

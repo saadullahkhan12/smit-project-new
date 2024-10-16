@@ -39,7 +39,8 @@ const Sidebar = () => {
          
         </ul>
         <button className="bg-gray-800 p-2 rounded-md mt-8 flex items-center space-x-2">
-          <span>Logout</span>
+          <Link to={"/login"}> <span>Logout</span>
+          </Link>
         </button>
       </div>
     </div>

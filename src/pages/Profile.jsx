@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-function Profile() {
+function Profile({email}) {
   
 
   return (
@@ -20,8 +20,7 @@ function Profile() {
           className="w-24 h-24 rounded-full border-4 border-white object-cover"
         />
         <div className="text-center mt-3">
-          <h2 className="text-2xl font-semibold">John Doe</h2>
-          <p className="text-gray-500">john.doe@gmail.com</p>
+          <h2 className="text-2xl font-semibold"> {email}</h2>
         </div>
       </div>
 
@@ -29,8 +28,7 @@ function Profile() {
       <div className="mt-8 w-full max-w-4xl">
         <div className="flex justify-center space-x-8 border-b">
           <button className="py-2 px-4 font-semibold border-b-4 border-[#8dd3bb] text-gray-800">Account</button>
-          <button className="py-2 px-4 text-gray-500">History</button>
-          <Link to={"/SignUpForm"}  className="py-2 px-4 text-gray-500" > Payment methods</Link>
+          <Link to={"/Addcard"}  className="py-2 px-4 text-gray-500" > Payment methods</Link>
           
           
           

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from "../firebase/main";
 import { Link, useNavigate } from "react-router-dom";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 
 const SignUp = () => {
@@ -19,11 +21,17 @@ const SignUp = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User created');
+      <Stack  sx={{ width: '100%' }} spacing={2} > <Alert variant="filled" severity="success">
+       USER successfully .
+    </Alert></Stack>
     } catch (err) {
       setError(err.message);
     }
   };
+  if (email == "muhammadsaadullah" && password == "saadullah") {
+    navigate("/Dashboard")
+    
+  }
 
   const handleGoogleSignIn = async () => {
     try {
