@@ -1,10 +1,44 @@
 import React, { useState } from "react";
+  import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from "../firebase/main";
+import { useNavigate } from "react-router";
 
 function Login() {
 
+  const navigate =useNavigate()
 
       
- 
+  
+  
+  
+  
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      navigate('/')
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        console.log('User signed in');
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+  
+    const handleGoogleSignIn = async () => {
+      try {
+        const result = await signInWithPopup(auth,googleProvider );
+        console.log('Google sign in success:', result.user);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+
+
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="flex w-3/4 max-w-4xl rounded-lg shadow-lg overflow-hidden">
@@ -17,15 +51,16 @@ function Login() {
           <p className="text-gray-600 mb-8">Login to access your Globe account.</p>
 
           {/* Form */}
-          <form>
+          <form onSubmit={handleSubmit} >
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-600 mb-2">
                 Email
               </label>
               <input
+                          onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 id="email"
-                placeholder="john.doe@gmail.com"
+                placeholder="user.@gmail.com"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#8dd3bb]"
               />
             </div>
@@ -34,6 +69,7 @@ function Login() {
                 Password
               </label>
               <input
+                          onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 id="password"
                 placeholder="********"
@@ -56,6 +92,11 @@ function Login() {
             <button className="w-full bg-[#8dd3bb] text-white py-2 rounded-lg font-semibold hover:bg-[#72c0a4] transition duration-300">
               Login
             </button>
+            <button 
+                      onClick={handleGoogleSignIn}
+            className="w-full bg-[#8dd3bb] text-white py-2 my-5 rounded-lg font-semibold hover:bg-[#72c0a4] transition duration-300">
+            login with  google
+            </button>
 
             <p className="text-center text-gray-600 mt-4">
               Don't have an account?{" "}
@@ -72,7 +113,8 @@ function Login() {
               <button className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full">
                 <img src="https://img.icons8.com/?size=96&id=118497&format=png" alt="Facebook" className="h-6" />
               </button>
-              <button className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full">
+              <button 
+                      onClick={handleGoogleSignIn} className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full">
                 <img src="https://img.icons8.com/?size=96&id=17949&format=png" alt="Google" className="h-6" />
               </button>
               <button className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full">

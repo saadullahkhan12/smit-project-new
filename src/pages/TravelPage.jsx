@@ -1,5 +1,7 @@
+import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { db } from '../firebase/main';
 
 
 
@@ -11,9 +13,19 @@ const TravelPage = () => {
   const [passengers, setPassengers] = useState(1);
   const [classType, setClassType] = useState("Economy");
 
-  const handleSearch = () => {
-    console.log(`Searching flights from ${from} to ${to} ${departureDate} `);
-  };
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      try {
+        // Add a new document with a generated ID
+        await addDoc(collection(db, 'users'), {
+          email: email,
+          name: name,
+        });
+        alert('Data added successfully');
+      } catch (e) {
+        console.error('Error adding document: ', e);
+      }
+    };  
   const locations = [
     { cites: 'Istanbul, Turkey', image: 'https://images.unsplash.com/photo-1499678329028-101435549a4e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dHVya2tleSUyMHBsYWNlfGVufDB8fDB8fHww',id:1 },
     { cites: 'Sydney, Australia', image: 'https://media.istockphoto.com/id/1996253989/photo/aerial-view-of-car-parked-with-camper-and-young-man-overlooking-the-great-australian-bight.webp?a=1&b=1&s=612x612&w=0&k=20&c=u9wQGPQjYyf3vm17V5wRSMmJTJXe8ZSdEOkCX76hgP8=',id:2 },
@@ -25,6 +37,7 @@ const TravelPage = () => {
     { cites: 'Tokyo, Japan', image: 'https://plus.unsplash.com/premium_photo-1723608003732-f6c9797972bc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8akFQQU5wbGFjZSUyMGhvdGVsfGVufDB8fDB8fHww' ,id:8 },
     { cites: 'Dubai, UAE', image: 'https://images.unsplash.com/photo-1615880325185-c794f749b92c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZHViYWklMjBwbGFjZSUyMGhvdGVsfGVufDB8fDB8fHww',id:9 }
   ];
+
 
   return (
     <>
@@ -46,12 +59,14 @@ const TravelPage = () => {
 
 
 
+      <form onSubmit={handleSubmit}>
 
 
 
           <div className="container mx-auto p-6">
   <div className="bg-white shadow-md rounded-lg p-4">
     <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+        
       <input
         type="text"
         placeholder="From"
@@ -106,9 +121,10 @@ const TravelPage = () => {
   </div>
   </div>
 </div>
+</form>
 
 
-          <button onClick={handleSearch} className="w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600">
+          <button onClick={handleSubmit} className="w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600">
             Show Flights
           </button>
         </div>

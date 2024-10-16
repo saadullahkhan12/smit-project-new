@@ -1,30 +1,38 @@
-import React, { useState } from "react";
 import { FaFacebookF, FaGoogle, FaApple } from "react-icons/fa"; // Import icons
+import React, { useState } from 'react';
+import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from "../firebase/main";
+import { Link, useNavigate } from "react-router-dom";
 
-const Signup = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-    termsAgreed: false,
-  });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+const SignUp = () => {
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form data submitted", formData);
+    navigate('/')
+    
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log('User created');
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log('Google sign in success:', result.user);
+    } catch (err) {
+      setError(err.message);
+    }
+  }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50">
       <div className="max-w-6xl w-full bg-white rounded-lg shadow-lg overflow-hidden flex">
@@ -50,16 +58,12 @@ const Signup = () => {
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
                 className="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               />
               <input
                 type="text"
                 name="lastName"
                 placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
                 className="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
@@ -69,16 +73,14 @@ const Signup = () => {
                 type="email"
                 name="email"
                 placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               />
               <input
                 type="text"
                 name="phone"
                 placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleChange}
                 className="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
@@ -88,16 +90,15 @@ const Signup = () => {
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               />
               <input
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm Password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
+                
                 className="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
@@ -106,8 +107,6 @@ const Signup = () => {
               <input
                 type="checkbox"
                 name="termsAgreed"
-                checked={formData.termsAgreed}
-                onChange={handleChange}
                 className="mr-2"
               />
               <span className="text-sm text-gray-600">
@@ -123,6 +122,9 @@ const Signup = () => {
             </div>
 
             <button
+            
+            onClick={handleSubmit}
+
               type="submit"
               className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition duration-300"
             >
@@ -130,6 +132,8 @@ const Signup = () => {
             </button>
             <button
               type="submit"
+              onClick={handleGoogleSignIn}
+
               className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition duration-300"
             >
               Signin With  Google
@@ -138,9 +142,8 @@ const Signup = () => {
 
           <p className="text-center text-sm text-gray-500 mt-4">
             Already have an account?{" "}
-            <a href="#" className="text-green-500 underline">
-              Login
-            </a>
+            <Link to="/login" className="text-green-500 underline" >Login</Link>
+              
           </p>
 
           {/* Social Sign Up Buttons */}
@@ -169,4 +172,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;
