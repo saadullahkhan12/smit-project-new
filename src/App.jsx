@@ -10,7 +10,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import AddCard from './pages/AddCard';
-import Flightbooking from './pages/flightbooking';
 
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
       <Route path='/HotelCard' element={<HotelCard/>}/>
       <Route path='/Profile' element={<Profile/>}/>
       <Route path='/Addcard' element={<AddCard/>}/>
-      <Route path='/Flightbooking' element={<Flightbooking/>}/>
       
 
 
