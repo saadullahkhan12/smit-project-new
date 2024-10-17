@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './pages/Header';
-import Footer from './pages/footer';
+import Footer from './pages/Footer';
 import HotelCard from './pages/HotelCard';
 import HotelListingPage from './pages/HotelListingPage';
 import TravelPage from './pages/TravelPage';
