@@ -20,7 +20,7 @@ const Sidebar = () => {
             <Link to=""> <span> Hotel Bookings</span></Link>
           </li>
           <li className="flex items-center space-x-2">
-            <span>flight  booking</span>
+           <Link to={"/Flightbooking"}><span>flight  booking</span></Link> 
           </li>
           <li className="flex items-center space-x-2">
             <span>Settings</span>

@@ -1,9 +1,9 @@
-import { addDoc, collection } from 'firebase/firestore';
+
+
+    import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { db } from '../firebase/main';
-
-
+import { db } from '../firebase/main'; // Ensure this points to your correct Firestore configuration
 
 const TravelPage = () => {
   const [from, setFrom] = useState("Lahore");
@@ -13,19 +13,24 @@ const TravelPage = () => {
   const [passengers, setPassengers] = useState(1);
   const [classType, setClassType] = useState("Economy");
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      try {
-        // Add a new document with a generated ID
-        await addDoc(collection(db, 'users'), {
-          email: email,
-          name: name,
-        });
-        alert('Data added successfully');
-      } catch (e) {
-        console.error('Error adding document: ', e);
-      }
-    };  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // Add a new document with a generated ID
+      await addDoc(collection(db, 'user'), {
+        from: from,
+        classType: classType,
+        returnDate: returnDate,
+        passengers: parseInt(passengers, 10), // Ensure passengers are stored as a number
+        to: to,
+        departureDate: departureDate,
+      });
+
+      alert('Data added successfully');
+    } catch (error) {
+      console.log('Error adding document: ', error);
+    }
+  };
   const locations = [
     { cites: 'Istanbul, Turkey', image: 'https://images.unsplash.com/photo-1499678329028-101435549a4e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dHVya2tleSUyMHBsYWNlfGVufDB8fDB8fHww',id:1 },
     { cites: 'Sydney, Australia', image: 'https://media.istockphoto.com/id/1996253989/photo/aerial-view-of-car-parked-with-camper-and-young-man-overlooking-the-great-australian-bight.webp?a=1&b=1&s=612x612&w=0&k=20&c=u9wQGPQjYyf3vm17V5wRSMmJTJXe8ZSdEOkCX76hgP8=',id:2 },
