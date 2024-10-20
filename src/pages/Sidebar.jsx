@@ -17,10 +17,10 @@ const Sidebar = () => {
             <span>Admin Profile</span>
           </li>
           <li className="flex items-center space-x-2">
-            <Link to=""> <span> Hotel Bookings</span></Link>
+            <Link to="/Hotelbookingadmin"> <span> User Details</span></Link>
           </li>
           <li className="flex items-center space-x-2">
-           <Link to={"/Flightbooking"}><span>flight  booking</span></Link> 
+           <Link to={"/FlightBookingAdmin"}><span>flight  booking</span></Link> 
           </li>
           <li className="flex items-center space-x-2">
             <span>Settings</span>

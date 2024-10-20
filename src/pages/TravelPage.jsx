@@ -129,12 +129,12 @@ const TravelPage = () => {
 </form>
 
 
-          <button onClick={handleSubmit} className="w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600">
+          <button onClick={handleSubmit} className="w-full bg-[#8dd3bb] text-black font-semibold rounded-md py-2 hover:bg-[#8dd3bb]">
             Show Flights
           </button>
         </div>
 
-        <h2 className="mt-6 text-2xl font-bold text-center">Plan your perfect trip</h2>
+        <h2 className="mt-6 text-2xl font-bold font-mono text-center">Plan your perfect trip</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         {locations.map(({image,cites,id}) => (
             <div key={id} className="bg-white shadow-md rounded-lg overflow-hidden">

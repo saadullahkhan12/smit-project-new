@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 
 const HotelListingPage = () => {
     const [hotelData, setHotelData] = useState([]);
+    const [products, setproducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [price, setPrice] = useState(2000); // Default starting price
+    const [price, setPrice] = useState(2000);
+     // Default starting price
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +36,12 @@ const HotelListingPage = () => {
     if (error) {
         return <div className="flex justify-center items-center h-screen"><h1 className="text-red-600">{`Error: ${error}`}</h1></div>;
     }
+    const details = (hotelData) => {
+        console.log('Selected Product:', hotelData); // Log the product in the console
+        products(hotelData); // Set the selected product in state
+      };
+      console.log(products,"333333");
+      
 
     // Filter hotels based on selected price
     const filteredHotels = hotelData.filter(hotel => hotel.price <= price);
@@ -82,8 +90,8 @@ const HotelListingPage = () => {
                                 <p className="text-gray-500">{hotel.description}</p>
                                 <div className="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center">
                                     <span className="text-red-500 text-xl font-bold">${hotel.price}</span>
-                                    <Link to="/Profile" className="mt-4 sm:mt-0">
-                                        <button className="px-6 py-2 bg-[#8dd3bb] text-white rounded-lg w-full sm:w-auto"> Book Now </button>
+                                    <Link to="/AddCard" className="mt-4 sm:mt-0">
+                                        <button onClick={()=>details(hotelData)} className="px-6 py-2 bg-[#8dd3bb] text-white rounded-lg w-full sm:w-auto"> Book Now </button>
                                     </Link>
                                 </div>
                             </div>

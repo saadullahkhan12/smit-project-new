@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import AddCard from './pages/AddCard';
+import FlightBookingAdmin from './pages/FlightBookingAdmin';
+import Hotelbookingadmin from './pages/Hotelbookingadmin';
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
       <Route path='/HotelCard' element={<HotelCard/>}/>
       <Route path='/Profile' element={<Profile/>}/>
       <Route path='/Addcard' element={<AddCard/>}/>
+      <Route path='/FlightBookingAdmin' element={<FlightBookingAdmin/>}/>
+      <Route path='/Hotelbookingadmin' element={<Hotelbookingadmin/>}/>
       
 
 
